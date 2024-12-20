@@ -1,5 +1,13 @@
+import { Outlet } from "react-router-dom";
+import Navbar from "./components/layout/Navbar";
+
 function App() {
-  return <h1>Red Ribbon</h1>;
+  return (
+    <div>
+      <Navbar />
+      <Outlet />
+    </div>
+  );
 }
 
 export default App;
