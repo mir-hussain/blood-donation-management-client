@@ -1,11 +1,5 @@
-import { Button } from "@/components/ui/button";
-
 function App() {
-  return (
-    <div>
-      <h1>Mir Nahiyan</h1> <Button>Click me</Button>
-    </div>
-  );
+  return <h1>Red Ribbon</h1>;
 }
 
 export default App;
