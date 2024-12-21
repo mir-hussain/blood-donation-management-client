@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 export default function Navbar() {
   return (
@@ -8,8 +8,30 @@ export default function Navbar() {
           Blood Link
         </Link>
         <div className="flex gap-3 items-center">
-          <Link to="/hospitals">Hospitals</Link>
-          <Link to="/requests">Requests</Link>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "underline" : "hover:underline"
+            }
+            to="/hospitals"
+          >
+            Hospitals
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "underline" : "hover:underline"
+            }
+            to="/requests"
+          >
+            Requests
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "underline" : "hover:underline"
+            }
+            to="/login"
+          >
+            Login
+          </NavLink>
         </div>
       </nav>
     </header>

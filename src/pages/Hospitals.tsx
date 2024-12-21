@@ -1,7 +1,9 @@
+import Container from "@/components/ui/container";
+
 export default function Hospitals() {
   return (
-    <div>
+    <Container>
       <h1> This is Hospitals component </h1>
-    </div>
+    </Container>
   );
 }
