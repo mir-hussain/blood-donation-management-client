@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import bloodDonation from "../../../public/blood-donation.png";
+import bloodDonation from "@/assets/blood-donation.png";
+import { Link } from "react-router-dom";
 
 export function LoginForm({
   className,
@@ -18,7 +19,7 @@ export function LoginForm({
               <div className="flex flex-col items-center text-center">
                 <h1 className="text-2xl font-bold">Welcome back</h1>
                 <p className="text-balance text-muted-foreground">
-                  Login to your Acme Inc account
+                  Login to your Blood Link account
                 </p>
               </div>
               <div className="grid gap-2">
@@ -81,9 +82,9 @@ export function LoginForm({
               </div>
               <div className="text-center text-sm">
                 Don&apos;t have an account?{" "}
-                <a href="#" className="underline underline-offset-4">
-                  Sign up
-                </a>
+                <Link to="/register" className="underline underline-offset-4">
+                  Register
+                </Link>
               </div>
             </div>
           </form>
