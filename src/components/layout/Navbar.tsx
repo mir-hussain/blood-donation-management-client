@@ -1,4 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
+import { Button } from "../ui/button";
 
 export default function Navbar() {
   return (
@@ -30,7 +31,7 @@ export default function Navbar() {
             }
             to="/login"
           >
-            Login
+            <Button>Login</Button>
           </NavLink>
         </div>
       </nav>
