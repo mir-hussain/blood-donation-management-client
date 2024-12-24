@@ -5,12 +5,17 @@ import Hospitals from "@/pages/Hospitals";
 import Register from "@/pages/Register";
 import Login from "@/pages/Login";
 import HospitalDetails from "@/pages/HospitalDetails";
+import HomePage from "@/pages/Home";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
+      {
+        index: true,
+        element: <HomePage />,
+      },
       {
         path: "/requests",
         element: <Requests />,
