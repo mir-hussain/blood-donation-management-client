@@ -12,12 +12,14 @@ import {
 import { ChangeEvent, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
-export default function HospitalFilters() {
+export default function RequestFilters() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [selectedCity, setSelectedCity] = useState<string | undefined>(
     searchParams.get("city") ?? undefined
   );
-
+  const [selectedBloodType, setSelectedBloodType] = useState<
+    string | undefined
+  >(searchParams.get("bloodType") ?? undefined);
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearchTerm = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -37,8 +39,11 @@ export default function HospitalFilters() {
 
     if (data) {
       filter.set(keyword, data);
-
-      setSelectedCity(data);
+      if (keyword === "city") {
+        setSelectedCity(data);
+      } else {
+        setSelectedBloodType(data);
+      }
     }
 
     setSearchParams(filter, { replace: true });
@@ -47,7 +52,7 @@ export default function HospitalFilters() {
   const handleClearFilter = () => {
     setSearchParams(new URLSearchParams(), { replace: true });
     setSelectedCity("");
-
+    setSelectedBloodType("");
     setSearchTerm("");
   };
   return (
@@ -70,6 +75,24 @@ export default function HospitalFilters() {
         >
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Select City" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Fruits</SelectLabel>
+              <SelectItem value="apple">Apple</SelectItem>
+              <SelectItem value="banana">Banana</SelectItem>
+              <SelectItem value="blueberry">Blueberry</SelectItem>
+              <SelectItem value="grapes">Grapes</SelectItem>
+              <SelectItem value="pineapple">Pineapple</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+        <Select
+          value={selectedBloodType}
+          onValueChange={(data) => handleSelectChange(data, "bloodType")}
+        >
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Select Blood Type" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
