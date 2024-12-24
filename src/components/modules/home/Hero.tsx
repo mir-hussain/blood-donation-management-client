@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 export default function Hero() {
   return (
-    <div className="relative bg-red-600 text-white">
+    <div className="relative bg-red-500 text-white">
       <div className="absolute inset-0 overflow-hidden">
         <img
           src="/placeholder.svg?height=600&width=1600"
@@ -20,10 +20,10 @@ export default function Hero() {
         </p>
         <div className="space-x-4">
           <Button asChild>
-            <Link to="/donate">Donate Now</Link>
+            <Link to="/requests">Donate Now</Link>
           </Button>
-          <Button variant="outline" asChild>
-            <Link to="/request">Request Blood</Link>
+          <Button variant="secondary" asChild>
+            <Link to="/requests">Request Blood</Link>
           </Button>
         </div>
       </div>
