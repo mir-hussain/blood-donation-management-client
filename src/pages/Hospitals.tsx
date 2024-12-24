@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import Container from "@/components/ui/container";
 import { Input } from "@/components/ui/input";
 import {
@@ -9,13 +10,21 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 export default function Hospitals() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const [selectedCity, setSelectedCity] = useState<string | undefined>(
+    searchParams.get("city") ?? undefined
+  );
+  const [selectedArea, setSelectedArea] = useState<string | undefined>(
+    searchParams.get("area") ?? undefined
+  );
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearchTerm = (e: ChangeEvent<HTMLInputElement>): void => {
+    setSearchTerm(e.target.value);
     const search = new URLSearchParams(searchParams);
     if (e.target.value) {
       search.set("searchTerm", e.target.value);
@@ -31,11 +40,21 @@ export default function Hospitals() {
 
     if (data) {
       filter.set(keyword, data);
-    } else {
-      filter.delete(keyword);
+      if (keyword === "city") {
+        setSelectedCity(data);
+      } else {
+        setSelectedArea(data);
+      }
     }
 
     setSearchParams(filter, { replace: true });
+  };
+
+  const handleClearFilter = () => {
+    setSearchParams(new URLSearchParams(), { replace: true });
+    setSelectedCity("");
+    setSelectedArea("");
+    setSearchTerm("");
   };
 
   return (
@@ -46,10 +65,17 @@ export default function Hospitals() {
             type="text"
             placeholder="Search..."
             onChange={(e) => handleSearchTerm(e)}
+            value={searchTerm}
           />
         </div>
         <div className="flex space-x-4">
-          <Select onValueChange={(data) => handleSelectChange(data, "city")}>
+          {Array.from(searchParams.keys()).length > 0 && (
+            <Button onClick={handleClearFilter}>Clear Filter</Button>
+          )}
+          <Select
+            value={selectedCity}
+            onValueChange={(data) => handleSelectChange(data, "city")}
+          >
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Select City" />
             </SelectTrigger>
@@ -64,7 +90,10 @@ export default function Hospitals() {
               </SelectGroup>
             </SelectContent>
           </Select>
-          <Select>
+          <Select
+            value={selectedArea}
+            onValueChange={(data) => handleSelectChange(data, "area")}
+          >
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Select Area" />
             </SelectTrigger>
