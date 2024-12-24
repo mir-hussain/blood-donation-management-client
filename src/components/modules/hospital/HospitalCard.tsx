@@ -11,7 +11,10 @@ export default function HospitalCard() {
           <p> 01712345678 </p>
         </div>
         <div>
-          <Link to="#" className="flex items-center hover:underline">
+          <Link
+            to="/hospitals/34523452345234"
+            className="flex items-center hover:underline"
+          >
             <span> View Details </span>
             <ChevronRight className="mt-[2px] size-5" />
           </Link>

@@ -4,7 +4,7 @@ import { Button } from "../ui/button";
 export default function Navbar() {
   return (
     <header className="w-full">
-      <nav className="flex items-center justify-between gap-3 max-w-7xl mx-auto px-2 h-16">
+      <nav className="flex items-center justify-between gap-3 container mx-auto px-2 h-16">
         <Link to="/" className="text-xl font-semibold">
           Blood Link
         </Link>

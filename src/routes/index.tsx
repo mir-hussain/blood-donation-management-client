@@ -4,6 +4,7 @@ import Requests from "@/pages/Requests";
 import Hospitals from "@/pages/Hospitals";
 import Register from "@/pages/Register";
 import Login from "@/pages/Login";
+import HospitalDetails from "@/pages/HospitalDetails";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
       {
         path: "/hospitals",
         element: <Hospitals />,
+      },
+      {
+        path: "/hospitals/:id",
+        element: <HospitalDetails />,
       },
       {
         path: "/requests",
