@@ -1,3 +1,4 @@
+import HospitalCard from "@/components/modules/hospital/HospitalCard";
 import { Button } from "@/components/ui/button";
 import Container from "@/components/ui/container";
 import { Input } from "@/components/ui/input";
@@ -110,7 +111,9 @@ export default function Hospitals() {
           </Select>
         </div>
       </div>
-      <h1> This is Hospitals component </h1>
+      <div>
+        <HospitalCard />
+      </div>
     </Container>
   );
 }
