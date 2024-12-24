@@ -6,6 +6,8 @@ import Register from "@/pages/Register";
 import Login from "@/pages/Login";
 import HospitalDetails from "@/pages/HospitalDetails";
 import HomePage from "@/pages/Home";
+import AdminLayout from "@/components/layout/AdminLayout";
+import Dashboard from "@/pages/admin/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +33,16 @@ const router = createBrowserRouter([
       {
         path: "/requests",
         element: <Requests />,
+      },
+      {
+        path: "/admin",
+        element: <AdminLayout />,
+        children: [
+          {
+            index: true,
+            element: <Dashboard />,
+          },
+        ],
       },
     ],
   },

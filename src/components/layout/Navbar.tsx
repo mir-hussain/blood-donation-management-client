@@ -29,6 +29,14 @@ export default function Navbar() {
             className={({ isActive }) =>
               isActive ? "underline" : "hover:underline"
             }
+            to="/admin"
+          >
+            Admin
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "underline" : "hover:underline"
+            }
             to="/login"
           >
             <Button>Login</Button>
