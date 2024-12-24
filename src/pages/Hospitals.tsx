@@ -9,16 +9,47 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { ChangeEvent } from "react";
+import { useSearchParams } from "react-router-dom";
 
 export default function Hospitals() {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const handleSearchTerm = (e: ChangeEvent<HTMLInputElement>): void => {
+    const search = new URLSearchParams(searchParams);
+    if (e.target.value) {
+      search.set("searchTerm", e.target.value);
+    } else {
+      search.delete("searchTerm");
+    }
+
+    setSearchParams(search, { replace: true });
+  };
+
+  const handleSelectChange = (data: string, keyword: string) => {
+    const filter = new URLSearchParams(searchParams);
+
+    if (data) {
+      filter.set(keyword, data);
+    } else {
+      filter.delete(keyword);
+    }
+
+    setSearchParams(filter, { replace: true });
+  };
+
   return (
     <Container>
       <div className="flex justify-between items-center my-10">
         <div>
-          <Input type="text" placeholder="Search..." />
+          <Input
+            type="text"
+            placeholder="Search..."
+            onChange={(e) => handleSearchTerm(e)}
+          />
         </div>
         <div className="flex space-x-4">
-          <Select>
+          <Select onValueChange={(data) => handleSelectChange(data, "city")}>
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Select City" />
             </SelectTrigger>
