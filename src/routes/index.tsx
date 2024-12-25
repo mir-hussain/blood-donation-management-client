@@ -12,6 +12,7 @@ import CreateAdmin from "@/pages/admin/CreateAdmin";
 import AddReceptionist from "@/pages/admin/AddReceptionist";
 import AddHospital from "@/pages/admin/AddHospital";
 import Profile from "@/pages/Profile";
+import RequestBloodForm from "@/pages/RequestBlood";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "profile",
         element: <Profile />,
+      },
+      {
+        path: "request-blood",
+        element: <RequestBloodForm />,
       },
     ],
   },
