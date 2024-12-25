@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { ChangeEvent, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 export default function RequestFilters() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -105,6 +105,9 @@ export default function RequestFilters() {
             </SelectGroup>
           </SelectContent>
         </Select>
+        <Link to="/request-blood">
+          <Button>Request Blood</Button>
+        </Link>
       </div>
     </div>
   );

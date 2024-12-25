@@ -1,15 +1,27 @@
 import { Button } from "@/components/ui/button";
+import { IRequest } from "@/types";
+import { format } from "date-fns";
 
-export default function RequestCard() {
+interface IProps {
+  request: IRequest;
+}
+
+export default function RequestCard({ request }: IProps) {
+  console.log(request);
+  const user = JSON.parse(request.user);
+
   return (
     <div className="bg-white p-4 rounded-lg border shadow  hover:shadow-lg transition-all">
-      <h1 className="text-2xl font-semibold mb-3"> John Doe </h1>
+      <h1 className="text-2xl font-semibold mb-3"> {user.name} </h1>
       <div className="flex items-end justify-between">
         <div>
-          <p className="text-xl mb-5">Blood type: O- </p>
-          <p>Units needed: 3 Bags </p>
-          <p>Location: Dhanmondi 15 </p>
-          <p>Date: 29-12-2024 </p>
+          <p className="text-xl mb-5">
+            Blood type: {request.blood_type_requested}
+          </p>
+          <p>Units needed: {request.quantity_requested} Bags </p>
+          <p>Location: {request.location} </p>
+          <p>City: {request.city} </p>
+          <p>Date: {format(new Date(request.request_date), "dd-MMM yyyy")} </p>
         </div>
         <div>
           <Button>Donate</Button>
