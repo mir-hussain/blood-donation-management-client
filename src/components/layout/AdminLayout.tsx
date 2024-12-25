@@ -14,7 +14,6 @@ import {
 } from "@/components/ui/sidebar";
 import { AppSidebar } from "./app-sidebar";
 import { Outlet } from "react-router-dom";
-import Navbar from "./Navbar";
 
 export default function Page() {
   return (
