@@ -11,6 +11,7 @@ import Dashboard from "@/pages/admin/Dashboard";
 import CreateAdmin from "@/pages/admin/CreateAdmin";
 import AddReceptionist from "@/pages/admin/AddReceptionist";
 import AddHospital from "@/pages/admin/AddHospital";
+import Profile from "@/pages/Profile";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "requests",
         element: <Requests />,
+      },
+      {
+        path: "profile",
+        element: <Profile />,
       },
     ],
   },
