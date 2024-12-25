@@ -23,7 +23,7 @@ export default function Hero() {
             <Link to="/requests">Donate Now</Link>
           </Button>
           <Button variant="secondary" asChild>
-            <Link to="/requests">Request Blood</Link>
+            <Link to="/request-blood">Request Blood</Link>
           </Button>
         </div>
       </div>
