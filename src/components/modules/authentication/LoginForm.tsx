@@ -38,11 +38,7 @@ export function LoginForm({
       dispatch(setUser({ user: user, token: res.data }));
       toast.success("Logged in", { id: toastId, duration: 2000 });
 
-      if (res.data.needsPasswordChange) {
-        navigate(`/change-password`);
-      } else {
-        navigate(`/${user.role}/dashboard`);
-      }
+      navigate(`/`);
     } catch (err) {
       console.error(err);
       toast.error("Something went wrong", { id: toastId, duration: 2000 });
