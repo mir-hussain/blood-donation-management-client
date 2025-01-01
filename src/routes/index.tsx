@@ -9,9 +9,6 @@ import HomePage from "@/pages/Home";
 import AdminLayout from "@/components/layout/AdminLayout";
 import Dashboard from "@/pages/admin/Dashboard";
 import ReceptionistDashboard from "@/pages/receptionist/Dashboard";
-import CreateAdmin from "@/pages/admin/CreateAdmin";
-import AddReceptionist from "@/pages/admin/AddReceptionist";
-import AddHospital from "@/pages/admin/AddHospital";
 import Profile from "@/pages/Profile";
 import RequestBloodForm from "@/pages/RequestBlood";
 import UserManagement from "@/pages/admin/UserManagement";
@@ -68,18 +65,6 @@ const router = createBrowserRouter([
         path: "hospital-management",
         element: <HospitalList />,
       },
-      {
-        path: "create-admin",
-        element: <CreateAdmin />,
-      },
-      {
-        path: "add-receptionist",
-        element: <AddReceptionist />,
-      },
-      {
-        path: "add-hospital",
-        element: <AddHospital />,
-      },
     ],
   },
   {
@@ -89,18 +74,6 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <ReceptionistDashboard />,
-      },
-      {
-        path: "create-admin",
-        element: <CreateAdmin />,
-      },
-      {
-        path: "add-receptionist",
-        element: <AddReceptionist />,
-      },
-      {
-        path: "add-hospital",
-        element: <AddHospital />,
       },
     ],
   },
