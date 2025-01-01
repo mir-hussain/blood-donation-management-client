@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button";
 import { IRequest } from "@/types";
 import { format } from "date-fns";
+import { DonationModal } from "./DonationModal";
 
 interface IProps {
   request: IRequest;
@@ -24,7 +24,7 @@ export default function RequestCard({ request }: IProps) {
           <p>Date: {format(new Date(request.request_date), "dd-MMM yyyy")} </p>
         </div>
         <div>
-          <Button>Donate</Button>
+          <DonationModal requestId={request.id} />
         </div>
       </div>
     </div>

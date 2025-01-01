@@ -1,38 +1,44 @@
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ChangeEvent, useState } from "react";
+import { citiesInBangladesh } from "@/constants/city";
 import { Link, useSearchParams } from "react-router-dom";
+interface IProps {
+  searchTerm: string;
+  setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+  selectedCity: string;
+  setSelectedCity: React.Dispatch<React.SetStateAction<string | undefined>>;
+}
 
-export default function RequestFilters() {
+export default function RequestFilters({
+  //   searchTerm,
+  setSearchTerm,
+  selectedCity,
+  setSelectedCity,
+}: IProps) {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [selectedCity, setSelectedCity] = useState<string | undefined>(
-    searchParams.get("city") ?? undefined
-  );
-  const [selectedBloodType, setSelectedBloodType] = useState<
-    string | undefined
-  >(searchParams.get("bloodType") ?? undefined);
-  const [searchTerm, setSearchTerm] = useState("");
 
-  const handleSearchTerm = (e: ChangeEvent<HTMLInputElement>): void => {
-    setSearchTerm(e.target.value);
-    const search = new URLSearchParams(searchParams);
-    if (e.target.value) {
-      search.set("searchTerm", e.target.value);
-    } else {
-      search.delete("searchTerm");
-    }
+  //   const [selectedBloodType, setSelectedBloodType] = useState<
+  //     string | undefined
+  //   >(searchParams.get("bloodType") ?? undefined);
 
-    setSearchParams(search, { replace: true });
-  };
+  //   const handleSearchTerm = (e: ChangeEvent<HTMLInputElement>): void => {
+  //     setSearchTerm(e.target.value);
+  //     const search = new URLSearchParams(searchParams);
+  //     if (e.target.value) {
+  //       search.set("searchTerm", e.target.value);
+  //     } else {
+  //       search.delete("searchTerm");
+  //     }
+
+  //     setSearchParams(search, { replace: true });
+  //   };
 
   const handleSelectChange = (data: string, keyword: string) => {
     const filter = new URLSearchParams(searchParams);
@@ -42,7 +48,7 @@ export default function RequestFilters() {
       if (keyword === "city") {
         setSelectedCity(data);
       } else {
-        setSelectedBloodType(data);
+        // setSelectedBloodType(data);
       }
     }
 
@@ -52,18 +58,18 @@ export default function RequestFilters() {
   const handleClearFilter = () => {
     setSearchParams(new URLSearchParams(), { replace: true });
     setSelectedCity("");
-    setSelectedBloodType("");
+    // setSelectedBloodType("");
     setSearchTerm("");
   };
   return (
     <div className="flex justify-between items-center my-10">
       <div>
-        <Input
+        {/* <Input
           type="text"
           placeholder="Search..."
           onChange={(e) => handleSearchTerm(e)}
           value={searchTerm}
-        />
+        /> */}
       </div>
       <div className="flex space-x-4">
         {Array.from(searchParams.keys()).length > 0 && (
@@ -78,16 +84,13 @@ export default function RequestFilters() {
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectLabel>Fruits</SelectLabel>
-              <SelectItem value="apple">Apple</SelectItem>
-              <SelectItem value="banana">Banana</SelectItem>
-              <SelectItem value="blueberry">Blueberry</SelectItem>
-              <SelectItem value="grapes">Grapes</SelectItem>
-              <SelectItem value="pineapple">Pineapple</SelectItem>
+              {citiesInBangladesh.map((city) => (
+                <SelectItem value={city}>{city}</SelectItem>
+              ))}
             </SelectGroup>
           </SelectContent>
         </Select>
-        <Select
+        {/* <Select
           value={selectedBloodType}
           onValueChange={(data) => handleSelectChange(data, "bloodType")}
         >
@@ -96,15 +99,12 @@ export default function RequestFilters() {
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectLabel>Fruits</SelectLabel>
-              <SelectItem value="apple">Apple</SelectItem>
-              <SelectItem value="banana">Banana</SelectItem>
-              <SelectItem value="blueberry">Blueberry</SelectItem>
-              <SelectItem value="grapes">Grapes</SelectItem>
-              <SelectItem value="pineapple">Pineapple</SelectItem>
+              {bloodTypes.map((bloodType) => (
+                <SelectItem value={bloodType}>{bloodType}</SelectItem>
+              ))}
             </SelectGroup>
           </SelectContent>
-        </Select>
+        </Select> */}
         <Link to="/request-blood">
           <Button>Request Blood</Button>
         </Link>
