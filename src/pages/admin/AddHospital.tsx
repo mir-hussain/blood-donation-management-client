@@ -1,6 +1,6 @@
 "use client";
 
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm, FieldValues } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -14,9 +14,31 @@ import { Input } from "@/components/ui/input";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Container from "@/components/ui/container";
+import { useAppSelector } from "@/redux/hooks";
+import { selectCurrentUser } from "@/redux/features/auth/authSlice";
+import { useCreateHospitalMutation } from "@/redux/features/hospital/hospitalApi";
+import { toast } from "sonner";
 
 export default function AddHospitalForm() {
+  const user = useAppSelector(selectCurrentUser);
   const form = useForm();
+
+  const [createHospital] = useCreateHospitalMutation();
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const hospitalData = {
+      ...data,
+      created_by_admin_id: user?.id,
+    };
+
+    const res = await createHospital(hospitalData).unwrap();
+
+    if (res.success) {
+      toast.success("Hospital created successfully");
+      form.reset();
+    }
+  };
+
+  form.handleSubmit(onSubmit);
 
   return (
     <Container className="flex justify-center mt-0 md:mt-16">
@@ -26,7 +48,7 @@ export default function AddHospitalForm() {
         </CardHeader>
         <CardContent>
           <Form {...form}>
-            <form className="space-y-6">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <FormField
                   control={form.control}
@@ -85,7 +107,7 @@ export default function AddHospitalForm() {
                 />
                 <FormField
                   control={form.control}
-                  name="contactNumber"
+                  name="contact_number"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Contact Number</FormLabel>

@@ -8,6 +8,7 @@ import HospitalDetails from "@/pages/HospitalDetails";
 import HomePage from "@/pages/Home";
 import AdminLayout from "@/components/layout/AdminLayout";
 import Dashboard from "@/pages/admin/Dashboard";
+import ReceptionistDashboard from "@/pages/receptionist/Dashboard";
 import CreateAdmin from "@/pages/admin/CreateAdmin";
 import AddReceptionist from "@/pages/admin/AddReceptionist";
 import AddHospital from "@/pages/admin/AddHospital";
@@ -77,7 +78,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Dashboard />,
+        element: <ReceptionistDashboard />,
       },
       {
         path: "create-admin",
