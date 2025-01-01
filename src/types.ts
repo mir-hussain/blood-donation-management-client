@@ -12,3 +12,14 @@ export interface IRequest {
   created_at: string;
   user: string;
 }
+
+export interface IHospital {
+  id: number;
+  name: string;
+  address: string;
+  city: string;
+  branch: string | null;
+  contact_number: string;
+  created_by_admin_id: number;
+  created_at: string;
+}
