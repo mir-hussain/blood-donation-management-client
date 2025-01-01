@@ -4,12 +4,28 @@ import Container from "@/components/ui/container";
 import Loading from "@/components/ui/loading";
 import { useGetHospitalsQuery } from "@/redux/features/hospital/hospitalApi";
 import { IHospital } from "@/types";
+import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 export default function Hospitals() {
-  const { data, isLoading, isError } = useGetHospitalsQuery(undefined);
+  const [searchParams] = useSearchParams();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCity, setSelectedCity] = useState<string | undefined>(
+    searchParams.get("city") ?? undefined
+  );
+  const { data, isLoading, isError } = useGetHospitalsQuery({
+    name: searchTerm,
+    city: selectedCity,
+  });
+
   return (
     <Container>
-      <HospitalFilters />
+      <HospitalFilters
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        selectedCity={selectedCity as string}
+        setSelectedCity={setSelectedCity}
+      />
       {isLoading && <Loading />}
       {!isLoading && !isError && (
         <div className="space-y-6">

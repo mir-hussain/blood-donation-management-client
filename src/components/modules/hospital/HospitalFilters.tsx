@@ -5,20 +5,27 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ChangeEvent, useState } from "react";
+import { citiesInBangladesh } from "@/constants/city";
+import { ChangeEvent } from "react";
 import { useSearchParams } from "react-router-dom";
 
-export default function HospitalFilters() {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [selectedCity, setSelectedCity] = useState<string | undefined>(
-    searchParams.get("city") ?? undefined
-  );
+interface IProps {
+  searchTerm: string;
+  setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+  selectedCity: string;
+  setSelectedCity: React.Dispatch<React.SetStateAction<string | undefined>>;
+}
 
-  const [searchTerm, setSearchTerm] = useState("");
+export default function HospitalFilters({
+  searchTerm,
+  setSearchTerm,
+  selectedCity,
+  setSelectedCity,
+}: IProps) {
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const handleSearchTerm = (e: ChangeEvent<HTMLInputElement>): void => {
     setSearchTerm(e.target.value);
@@ -73,12 +80,9 @@ export default function HospitalFilters() {
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectLabel>Fruits</SelectLabel>
-              <SelectItem value="apple">Apple</SelectItem>
-              <SelectItem value="banana">Banana</SelectItem>
-              <SelectItem value="blueberry">Blueberry</SelectItem>
-              <SelectItem value="grapes">Grapes</SelectItem>
-              <SelectItem value="pineapple">Pineapple</SelectItem>
+              {citiesInBangladesh.map((city) => (
+                <SelectItem value={city}>{city}</SelectItem>
+              ))}
             </SelectGroup>
           </SelectContent>
         </Select>
