@@ -24,12 +24,14 @@ export const hospitalApi = baseApi.injectEndpoints({
         method: "POST",
         body: newHospital,
       }),
+      invalidatesTags: ["hospital"],
     }),
     getHospitals: builder.query({
       query: (filters) => ({
         url: "hospital",
         params: filters,
       }),
+      providesTags: ["hospital"],
     }),
   }),
 });
