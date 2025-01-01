@@ -1,14 +1,21 @@
+import { IHospital } from "@/types";
 import { ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
-export default function HospitalCard() {
+interface IProps {
+  hospital: IHospital;
+}
+
+export default function HospitalCard({ hospital }: IProps) {
   return (
     <div className="bg-white p-4 rounded-lg border shadow  hover:shadow-lg transition-all">
-      <h1 className="text-xl font-semibold mb-3"> Ibn Sina (Dhanmondi) </h1>
+      <h1 className="text-xl font-semibold mb-3">
+        {hospital.name} {hospital.branch ?? hospital.branch}
+      </h1>
       <div className="flex items-end justify-between">
         <div className="text-sm text-gray-400">
-          <p> 123, Shukrabad, Dhanmondi, Dhaka </p>
-          <p> 01712345678 </p>
+          <p> {hospital.address} </p>
+          <p> {hospital.contact_number} </p>
         </div>
         <div>
           <Link
