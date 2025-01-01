@@ -9,33 +9,12 @@ import { AvatarImage } from "@radix-ui/react-avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuPortal,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import {
-  Cloud,
-  CreditCard,
-  Github,
-  Keyboard,
-  LifeBuoy,
-  LogOut,
-  Mail,
-  MessageSquare,
-  Plus,
-  PlusCircle,
-  Settings,
-  User,
-  UserPlus,
-  Users,
-} from "lucide-react";
+import { LogOut, User } from "lucide-react";
 import { useAppDispatch } from "@/redux/hooks";
 
 export default function Navbar() {
@@ -82,6 +61,14 @@ export default function Navbar() {
             to="/admin"
           >
             Admin
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "underline" : "hover:underline"
+            }
+            to="/receptionist"
+          >
+            Receptionist Admin
           </NavLink>
           {/* @ts-ignore */}
           {!user?.email ? (

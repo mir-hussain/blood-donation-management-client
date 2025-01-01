@@ -9,40 +9,55 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar";
+import { useAppSelector } from "@/redux/hooks";
+import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 
 // This is sample data.
-const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
+
+const adminRoutes = [
+  {
+    title: "Dashboard",
+    url: "/admin",
+    icon: SquareTerminal,
+    isActive: true,
   },
-  navMain: [
-    {
-      title: "Dashboard",
-      url: "/admin",
-      icon: SquareTerminal,
-      isActive: true,
-    },
-    {
-      title: "Add Hospital",
-      url: "/admin/add-hospital",
-      icon: Bot,
-    },
-    {
-      title: "Add Receptionist",
-      url: "/admin/add-receptionist",
-      icon: BookOpen,
-    },
-    {
-      title: "Create Admin",
-      url: "/admin/create-admin",
-      icon: Settings2,
-    },
-  ],
-};
+  {
+    title: "Add Hospital",
+    url: "/admin/add-hospital",
+    icon: Bot,
+  },
+  {
+    title: "Add Receptionist",
+    url: "/admin/add-receptionist",
+    icon: BookOpen,
+  },
+  {
+    title: "Create Admin",
+    url: "/admin/create-admin",
+    icon: Settings2,
+  },
+];
+
+const receptionistRoutes = [
+  {
+    title: "Dashboard",
+    url: "/receptionist",
+    icon: SquareTerminal,
+    isActive: true,
+  },
+];
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const user = useAppSelector(selectCurrentUser);
+
+  const data = {
+    user: {
+      name: user!.name,
+      email: user!.email,
+    },
+    navMain: user!.role === "admin" ? adminRoutes : receptionistRoutes,
+  };
+
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
