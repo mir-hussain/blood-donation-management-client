@@ -15,6 +15,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { AddHospitalModal } from "@/components/modules/admin/AddHospitalModal";
 
 type Hospital = {
   id: string;
@@ -65,6 +66,9 @@ export default function HospitalList() {
   return (
     <div className="container mx-auto py-10">
       <h1 className="text-2xl font-bold mb-5">Hospital Management</h1>
+      <div className="my-5 flex justify-end">
+        <AddHospitalModal />
+      </div>
       <div className="rounded-md border">
         <Table>
           <TableHeader>

@@ -1,4 +1,4 @@
-import { BookOpen, Bot, Settings2, SquareTerminal } from "lucide-react";
+import { Bot, Settings2, SquareTerminal } from "lucide-react";
 import { NavMain } from "./nav-main";
 import { NavUser } from "./nav-user";
 
@@ -22,18 +22,13 @@ const adminRoutes = [
     isActive: true,
   },
   {
-    title: "Add Hospital",
-    url: "/admin/add-hospital",
+    title: "Hospitals Management",
+    url: "/admin/hospital-management",
     icon: Bot,
   },
   {
-    title: "Add Receptionist",
-    url: "/admin/add-receptionist",
-    icon: BookOpen,
-  },
-  {
-    title: "Create Admin",
-    url: "/admin/create-admin",
+    title: "User Management",
+    url: "/admin/user-management",
     icon: Settings2,
   },
 ];

@@ -14,6 +14,8 @@ import AddReceptionist from "@/pages/admin/AddReceptionist";
 import AddHospital from "@/pages/admin/AddHospital";
 import Profile from "@/pages/Profile";
 import RequestBloodForm from "@/pages/RequestBlood";
+import UserManagement from "@/pages/admin/UserManagement";
+import HospitalList from "@/pages/admin/HospitalsList";
 
 const router = createBrowserRouter([
   {
@@ -57,6 +59,14 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Dashboard />,
+      },
+      {
+        path: "user-management",
+        element: <UserManagement />,
+      },
+      {
+        path: "hospital-management",
+        element: <HospitalList />,
       },
       {
         path: "create-admin",
