@@ -42,7 +42,6 @@ export function RegistrationForm({
   const [userRegister] = useRegisterMutation();
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data);
     const toastId = toast.loading("Registering");
 
     try {
@@ -56,7 +55,6 @@ export function RegistrationForm({
         role: "user",
       };
 
-      console.log(userInfo);
       const res = await userRegister(userInfo).unwrap();
 
       toast.success("Registered successfully", { id: toastId, duration: 2000 });

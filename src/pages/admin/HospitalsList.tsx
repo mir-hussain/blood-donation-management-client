@@ -21,7 +21,6 @@ import { IHospital } from "@/types";
 export default function HospitalList() {
   const { data, isLoading, isError } = useGetHospitalsQuery(undefined);
 
-  console.log(data);
   const handleDeleteHospital = (hospitalId: number) => {
     console.log(hospitalId);
   };

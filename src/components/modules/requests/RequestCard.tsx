@@ -24,7 +24,7 @@ export default function RequestCard({ request }: IProps) {
           <p>Date: {format(new Date(request.request_date), "dd-MMM yyyy")} </p>
         </div>
         <div>
-          <DonationModal requestId={request.id} />
+          <DonationModal request={request} />
         </div>
       </div>
     </div>

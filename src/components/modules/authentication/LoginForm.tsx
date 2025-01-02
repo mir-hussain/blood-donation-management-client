@@ -24,7 +24,6 @@ export function LoginForm({
   const [login] = useLoginMutation();
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data);
     const toastId = toast.loading("Logging in");
 
     try {

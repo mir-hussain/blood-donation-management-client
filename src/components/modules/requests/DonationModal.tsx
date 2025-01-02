@@ -17,7 +17,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { useAppSelector } from "@/redux/hooks";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import {
@@ -29,41 +28,36 @@ import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
-import { bloodTypes } from "@/constants/bloodTypes";
-import { Select } from "@radix-ui/react-select";
-import {
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { IRequest } from "@/types";
+import { useCreateDonationMutation } from "@/redux/features/donation/donationApi";
+import { toast } from "sonner";
 // import { toast } from "sonner";
 
 interface IProps {
-  requestId: number;
+  request: IRequest;
 }
 
-export function DonationModal({ requestId }: IProps) {
+export function DonationModal({ request }: IProps) {
   const user = useAppSelector(selectCurrentUser);
   const form = useForm();
 
+  const [createDonation] = useCreateDonationMutation();
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const donationData = {
-      ...data,
       user_id: user?.id,
-      donation_date: format(data.donation_date, "yyyy-mm-dd"),
-      request_id: requestId,
+      blood_type: request.blood_type_requested,
+      donation_date: data.donation_date,
+      quantity_donated: 1,
+      request_id: request.id,
     };
 
-    console.log(donationData);
+    const res = await createDonation(donationData).unwrap();
 
-    // const res = await createDonation(donationData).unwrap();
-
-    // if (res.success) {
-    //   toast.success("Donation recorded successfully");
-    //   form.reset();
-    // }
+    if (res.success) {
+      toast.success("Donation recorded successfully");
+      form.reset();
+    }
   };
 
   return (
@@ -83,39 +77,10 @@ export function DonationModal({ requestId }: IProps) {
             <div className="space-y-4">
               <FormField
                 control={form.control}
-                name="blood_type"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Blood Type</FormLabel>
-                    <FormControl>
-                      <Select
-                        value={field.value}
-                        onValueChange={field.onChange}
-                      >
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select Blood Type" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectGroup>
-                            {bloodTypes.map((bloodType) => (
-                              <SelectItem key={bloodType} value={bloodType}>
-                                {bloodType}
-                              </SelectItem>
-                            ))}
-                          </SelectGroup>
-                        </SelectContent>
-                      </Select>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
                 name="donation_date"
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
-                    <FormLabel> Request Date</FormLabel>
+                    <FormLabel>Donation Date</FormLabel>
                     <Popover>
                       <PopoverTrigger asChild>
                         <FormControl>
@@ -142,28 +107,14 @@ export function DonationModal({ requestId }: IProps) {
                             field.value ? new Date(field.value) : undefined
                           }
                           onSelect={field.onChange}
-                          disabled={(date) => date < new Date()}
+                          disabled={(date) =>
+                            date < new Date(new Date().setHours(0, 0, 0, 0)) ||
+                            date > new Date(request.request_date)
+                          }
                           initialFocus
                         />
                       </PopoverContent>
                     </Popover>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="quantity_donated"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Quantity Donated (in units)</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="number"
-                        placeholder="Enter quantity donated"
-                        {...field}
-                      />
-                    </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
