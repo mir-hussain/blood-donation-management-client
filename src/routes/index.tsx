@@ -13,6 +13,7 @@ import Profile from "@/pages/Profile";
 import RequestBloodForm from "@/pages/RequestBlood";
 import UserManagement from "@/pages/admin/UserManagement";
 import HospitalList from "@/pages/admin/HospitalsList";
+import Response from "@/pages/Response";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: "request-blood",
         element: <RequestBloodForm />,
+      },
+      {
+        path: "response/:id",
+        element: <Response />,
       },
     ],
   },

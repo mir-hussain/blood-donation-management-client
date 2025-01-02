@@ -31,13 +31,14 @@ import { Calendar } from "@/components/ui/calendar";
 import { IRequest } from "@/types";
 import { useCreateDonationMutation } from "@/redux/features/donation/donationApi";
 import { toast } from "sonner";
-// import { toast } from "sonner";
+import { useState } from "react";
 
 interface IProps {
   request: IRequest;
 }
 
 export function DonationModal({ request }: IProps) {
+  const [open, setOpen] = useState(false);
   const user = useAppSelector(selectCurrentUser);
   const form = useForm();
 
@@ -57,11 +58,12 @@ export function DonationModal({ request }: IProps) {
     if (res.success) {
       toast.success("Donation recorded successfully");
       form.reset();
+      setOpen(false);
     }
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button>Donate</Button>
       </DialogTrigger>

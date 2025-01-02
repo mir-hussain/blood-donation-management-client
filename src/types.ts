@@ -38,3 +38,16 @@ export interface IRequest {
   created_at: string;
   user: string;
 }
+
+export interface IResponse {
+  request_donation_id: number;
+  donation_id: number;
+  user_id: number;
+  user_name: string;
+  user_email: string;
+  user_phone: string;
+  hospital_id: string | null;
+  blood_type: string;
+  donation_date: string;
+  quantity_donated: number;
+}

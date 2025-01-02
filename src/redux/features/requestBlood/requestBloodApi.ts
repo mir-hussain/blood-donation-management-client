@@ -5,6 +5,9 @@ export const requestBloodApi = baseApi.injectEndpoints({
     getRequestById: builder.query({
       query: (id) => `request/${id}`,
     }),
+    getResponse: builder.query({
+      query: (id) => `donation/${id}/responses`,
+    }),
     updateRequest: builder.mutation({
       query: ({ id, ...data }) => ({
         url: `request/${id}`,
@@ -40,4 +43,5 @@ export const {
   useDeleteRequestMutation,
   useCreateRequestMutation,
   useGetRequestsQuery,
+  useGetResponseQuery,
 } = requestBloodApi;
