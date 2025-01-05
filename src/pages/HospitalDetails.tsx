@@ -22,6 +22,8 @@ import {
 } from "@/components/ui/table";
 import { Textarea } from "@/components/ui/textarea";
 import Container from "@/components/ui/container";
+import { useGetStorageQuery } from "@/redux/features/hospital/hospitalApi";
+import { useParams } from "react-router-dom";
 
 const bloodTypes = [
   { type: "A+", quantity: 50 },
@@ -38,6 +40,11 @@ export default function BloodBank() {
   const [selectedBloodType, setSelectedBloodType] = useState("");
   const [quantity, setQuantity] = useState("");
   const [reason, setReason] = useState("");
+  const { id } = useParams();
+
+  const { data } = useGetStorageQuery(id);
+
+  console.log(data);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -69,9 +76,9 @@ export default function BloodBank() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {bloodTypes.map((blood) => (
-                  <TableRow key={blood.type}>
-                    <TableCell>{blood.type}</TableCell>
+                {data?.data?.map((blood) => (
+                  <TableRow key={blood.blood_type}>
+                    <TableCell>{blood.blood_type}</TableCell>
                     <TableCell>{blood.quantity}</TableCell>
                   </TableRow>
                 ))}

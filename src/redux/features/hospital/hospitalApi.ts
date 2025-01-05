@@ -34,6 +34,12 @@ export const hospitalApi = baseApi.injectEndpoints({
       }),
       providesTags: ["hospital"],
     }),
+    getStorage: builder.query({
+      query: (id) => ({
+        url: `storage/hospital/${id}`,
+      }),
+      providesTags: ["hospital"],
+    }),
   }),
 });
 
@@ -43,4 +49,5 @@ export const {
   useDeleteHospitalMutation,
   useCreateHospitalMutation,
   useGetHospitalsQuery,
+  useGetStorageQuery,
 } = hospitalApi;
