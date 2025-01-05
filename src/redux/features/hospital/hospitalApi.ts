@@ -17,6 +17,7 @@ export const hospitalApi = baseApi.injectEndpoints({
         url: `hospital/${id}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["hospital"],
     }),
     createHospital: builder.mutation({
       query: (newHospital) => ({

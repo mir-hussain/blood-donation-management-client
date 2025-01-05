@@ -15,14 +15,18 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { AddHospitalModal } from "@/components/modules/admin/AddHospitalModal";
-import { useGetHospitalsQuery } from "@/redux/features/hospital/hospitalApi";
+import {
+  useDeleteHospitalMutation,
+  useGetHospitalsQuery,
+} from "@/redux/features/hospital/hospitalApi";
 import { IHospital } from "@/types";
 
 export default function HospitalList() {
   const { data, isLoading, isError } = useGetHospitalsQuery(undefined);
+  const [deleteHospital] = useDeleteHospitalMutation();
 
   const handleDeleteHospital = (hospitalId: number) => {
-    console.log(hospitalId);
+    deleteHospital(hospitalId);
   };
 
   return (
