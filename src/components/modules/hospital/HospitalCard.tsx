@@ -1,5 +1,5 @@
+import { Button } from "@/components/ui/button";
 import { IHospital } from "@/types";
-import { ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 interface IProps {
@@ -18,12 +18,8 @@ export default function HospitalCard({ hospital }: IProps) {
           <p> {hospital.contact_number} </p>
         </div>
         <div>
-          <Link
-            to="/hospitals/34523452345234"
-            className="flex items-center hover:underline"
-          >
-            <span> View Details </span>
-            <ChevronRight className="mt-[2px] size-5" />
+          <Link to={`/hospitals/${hospital.id}`}>
+            <Button variant="outline">View Details</Button>
           </Link>
         </div>
       </div>

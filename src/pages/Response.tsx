@@ -22,6 +22,8 @@ export default function Response() {
   const { data: responses } = useGetResponseQuery(id);
   const { data: request } = useGetRequestByIdQuery(id);
 
+  console.log(responses);
+
   if (!request) {
     return <div>Loading...</div>;
   }
@@ -69,40 +71,44 @@ export default function Response() {
         </CardContent>
       </Card>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Donation Responses</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Donor Name</TableHead>
-                <TableHead>Blood Type</TableHead>
-                <TableHead>Quantity Donated</TableHead>
-                <TableHead>Donation Date</TableHead>
-                <TableHead>Contact</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {responses?.data?.map((response: IResponse) => (
-                <TableRow key={response.donation_id}>
-                  <TableCell>{response.user_name}</TableCell>
-                  <TableCell>{response.blood_type}</TableCell>
-                  <TableCell>{response.quantity_donated} units</TableCell>
-                  <TableCell>
-                    {format(new Date(response.donation_date), "PPP")}
-                  </TableCell>
-                  <TableCell>
-                    <p>{response.user_email}</p>
-                    <p>{response.user_phone}</p>
-                  </TableCell>
+      {responses?.data?.length === 0 && <p>There is no response yet</p>}
+
+      {responses?.data?.length > 0 && (
+        <Card>
+          <CardHeader>
+            <CardTitle>Donation Responses</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Donor Name</TableHead>
+                  <TableHead>Blood Type</TableHead>
+                  <TableHead>Quantity Donated</TableHead>
+                  <TableHead>Donation Date</TableHead>
+                  <TableHead>Contact</TableHead>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
+              </TableHeader>
+              <TableBody>
+                {responses?.data?.map((response: IResponse) => (
+                  <TableRow key={response.donation_id}>
+                    <TableCell>{response.user_name}</TableCell>
+                    <TableCell>{response.blood_type}</TableCell>
+                    <TableCell>{response.quantity_donated} units</TableCell>
+                    <TableCell>
+                      {format(new Date(response.donation_date), "PPP")}
+                    </TableCell>
+                    <TableCell>
+                      <p>{response.user_email}</p>
+                      <p>{response.user_phone}</p>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+      )}
     </div>
   );
 }

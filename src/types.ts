@@ -51,3 +51,13 @@ export interface IResponse {
   donation_date: string;
   quantity_donated: number;
 }
+
+export interface IUser {
+  id: number;
+  role: string;
+  name: string;
+  email: string;
+  phone: string;
+  iat: number;
+  exp: number;
+}

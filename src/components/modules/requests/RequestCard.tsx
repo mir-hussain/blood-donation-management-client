@@ -1,13 +1,14 @@
 import { IRequest } from "@/types";
 import { format } from "date-fns";
 import { DonationModal } from "./DonationModal";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 interface IProps {
   request: IRequest;
 }
 
 export default function RequestCard({ request }: IProps) {
-  console.log(request);
   const user = JSON.parse(request.user);
 
   return (
@@ -23,7 +24,10 @@ export default function RequestCard({ request }: IProps) {
           <p>City: {request.city} </p>
           <p>Date: {format(new Date(request.request_date), "dd-MMM yyyy")} </p>
         </div>
-        <div>
+        <div className="space-x-3">
+          <Link to={`/response/${request.id}`}>
+            <Button variant="outline">Details</Button>
+          </Link>
           <DonationModal request={request} />
         </div>
       </div>

@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/sidebar";
 import { useAppSelector } from "@/redux/hooks";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
+import { Link } from "react-router-dom";
 
 // This is sample data.
 
@@ -55,8 +56,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   return (
     <Sidebar collapsible="icon" {...props}>
-      <SidebarHeader>
-        <h1 className="truncate">Blood Link</h1>
+      <SidebarHeader className="text-center mt-3">
+        <Link to="/" className="truncate text-2xl">
+          Blood Link
+        </Link>
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />

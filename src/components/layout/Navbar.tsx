@@ -16,15 +16,16 @@ import {
 } from "../ui/dropdown-menu";
 import { LogOut, User } from "lucide-react";
 import { useAppDispatch } from "@/redux/hooks";
+import { IUser } from "@/types";
 
 export default function Navbar() {
   const token = useSelector(useCurrentToken);
   const dispatch = useAppDispatch();
 
-  let user;
+  let user: IUser = {} as IUser;
 
   if (token) {
-    user = verifyToken(token);
+    user = verifyToken(token) as IUser;
   }
 
   const handleLogout = () => {
@@ -54,24 +55,27 @@ export default function Navbar() {
           >
             Requests
           </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              isActive ? "underline" : "hover:underline"
-            }
-            to="/admin"
-          >
-            Admin
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              isActive ? "underline" : "hover:underline"
-            }
-            to="/receptionist"
-          >
-            Receptionist Admin
-          </NavLink>
-          {/* @ts-ignore */}
-          {!user?.email ? (
+          {user.role === "admin" && (
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "underline" : "hover:underline"
+              }
+              to="/admin"
+            >
+              Admin
+            </NavLink>
+          )}
+          {user.role === "receptionist" && (
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "underline" : "hover:underline"
+              }
+              to="/receptionist"
+            >
+              Receptionist Admin
+            </NavLink>
+          )}
+          {user.email ? (
             <NavLink
               className={({ isActive }) =>
                 isActive ? "underline" : "hover:underline"
